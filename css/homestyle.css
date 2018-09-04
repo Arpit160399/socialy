@@ -1,0 +1,141 @@
+#{
+  margin: 0;
+  padding: 0;
+  }
+  .poistion
+  {
+    position: fixed;
+  }
+  h1{
+    font-size: 40;
+    font-family: sans-serif;
+    color: #ffffff;
+  }
+body{
+    background-color: #edededed;
+    }
+  #menu
+  {
+    margin-left: 150;
+  }
+  li
+  {
+   margin-left: 50;
+  }
+  .palce
+  {
+    margin-top: 80;
+  }
+  .inputarea
+  {
+    display: inline;
+    margin-top: 10px;
+    margin-bottom: 200px;
+    padding: 50;
+
+    background-color: #ffffff;
+    background-size: cover;
+  }
+  #newpost
+  {margin-top: 10;
+    margin-right: 20;
+    width: 520;
+    height: 60;
+    border: 0;
+    padding: 0;
+  }
+  #postbutton
+  {
+    border-radius: 5px;
+    border: 0;
+    color: #ffffff;
+    background-color: #48d0ec;
+   width: 80;
+   height: 40;
+   margin-right: 20;
+   margin-bottom: 20;
+  }
+  #feedscards{
+    margin-left: 10;
+    margin-right: 10;
+    margin-top: 20;
+    margin-bottom: 20;
+  }
+  .chats
+  {
+    background-color: rgba(0,0,0,0.6);
+    background-size: cover;
+
+  }
+  #icon{
+    margin-right: 135;
+    transition: transform 0.5s linear;
+  }
+  #icon:hover
+  {
+
+    transform: translateY(-15px);
+  }
+  .interaction
+  {
+    padding-left: 135;
+    padding-right: 0;
+  }
+  .padding-0
+  {
+    padding:0;
+  }
+  #chatheader
+  { padding-top: 10;
+  height: 40;
+  color: #ffffff;
+  background-color:rgba(255,255,255,0.19);
+  background-size: cover;
+}
+  h2{
+    font-family: sans-serif;
+   font-size: 24;
+   text-align: left;
+
+   margin-left: 20;
+   color: #edededed;
+  }
+.avtar
+{
+  border-radius: 50%;
+}
+.align{
+margin-top: -50;
+margin-left: 40;
+margin-right: 20;
+
+}
+.scroll {
+  height: 800px;
+  overflow-y: scroll; // Only add scroll to vertical column
+}
+.menu{
+  background-color: #ffffff;
+  height: 500px;
+
+}
+.menubutton
+{
+  margin: 10px;
+  color: #48D0EC;
+border-radius: 5px;
+width: 120px;
+height: 40px;
+background-color: #ffffff;
+border: 2px solid #edededed;
+}
+.menubutton:hover
+{
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.10) , 2px 6px 29px 0 rgba(0, 0, 0, 0.14);
+}
+modal-backdrop {
+
+
+
+ opacity:0.1;
+}

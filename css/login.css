@@ -1,0 +1,116 @@
+*
+{
+  margin:0px;
+  padding:0px;
+
+}
+.backgroundimg{
+
+  background-image:linear-gradient( rgba(0, 0, 0, 0.5) , rgba(0, 0, 0, 0.7)),url("socialybackground.jpg");
+  background-repeat: no-repeat;
+  height: 600px;
+  background-size: contain;
+}
+header
+{
+ color: #48D0EC;
+ font-size: 40px;
+ margin-left: 200px;
+ margin-top: 95px;
+ font-style: normal;
+ font-family: sans-serif;
+}
+h3{
+  color: #edededed;
+  font-size: 18px;
+
+}
+.padding-0{
+    padding-left:0;
+    padding-right:0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .headerbackground{
+    background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0, 0, 0.7)), url("250949-P4L7OU-528.jpg");
+    background-size: cover;
+  }
+form{
+  margin-top: 10px;
+  margin-left: 200px;
+}
+.input
+{
+  margin-top: 10px;
+  height: 45px;
+  padding-left: 10;
+  border-radius: 5px;
+  width: 270px;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+}
+.input:focus{
+  background-color: rgb(212,231,220);
+
+}
+.button{
+  border: 2px solid #ffffff;
+    background-color: transparent;
+    border-radius: 5px;
+  margin-left: 190px;
+  margin-top: 10px;
+ cursor: pointer;
+  width: 80px;
+  height: 40px;
+  color:  #ffffff;
+  }
+.button:hover{
+    background-color: #48D0EC;
+    color: #ffffff;
+    border: 0px;
+
+  }
+hr
+{
+  border: 0.5px solid #ffffff;
+  width: 15%;
+}
+.left{
+  margin-left: 210px;
+  margin-right: 10px;
+  margin-top: 10px;
+  float: left;
+}
+.right{
+  margin-right:220px;
+    margin-left: 10px;
+  margin-top: 10px;
+  float: right;
+}
+.signup{
+height: 45px;
+width: 270px;
+font-size: 18px;
+background-color: #48D0EC;
+color: #ffffff;
+border-radius: 5px;
+margin-top: 10px;
+border: 0px;
+}
+.signup:hover{
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.29) , 2px 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.divier{
+  display: inline;
+  margin-top: 15px;
+  color: #ffffff;
+  text-align: center;
+}
+.sectiondivide{
+  background-color: #edededed;
+  height: 250px;
+  background-size: cover;
+}
