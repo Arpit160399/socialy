@@ -1,46 +1,145 @@
-</html>
+<html>
+		<script>
+		function ShareName(str,id)
+	{
+		if(str.length < 3)
+		{
+			document.getElementById('list').innerHTML = '';
+			return;
+		}else
+		{
+			var http = new XMLHttpRequest();
+			http.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200){
+					document.getElementById('list'+id).innerHTML = this.responseText;
+				}
+				
+			   };
+			   http.open('GET',"share.php?name=" +str+"&post="+id, true)
+			   http.send();
+			}
+		
+ }
+ function shareitem(id,post)
+  {
+	 var http = new XMLHttpRequest();
+			http.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200){
+					document.getElementById('rep'+id).innerHTML = this.responseText;
+				}
+				
+			   };
+			   http.open('GET',"sharemech.php?id="+id+"&post="+post, true)
+			   http.send();
+			
+ }
+ 	function profile(str)
+	 {
+ 	window.location = "http://localhost/socialy/profile.php?id=" + encodeURIComponent(str);
+ 	}
+
+	</script>
 <head>
   <?php
   require 'dataconnetion.php';
    $a = $_COOKIE['data'];
-   $b =$_COOKIE['postinfo'];
+    $is = $a["POSTid"];
+  $sql2 = "SELECT * FROM `Like` WHERE userid =".$_SESSION['id']." AND postid =".$is;
+  $result2 = $conn->query($sql2);
+         if($result2 ->num_rows > 0)
+         {
+
+         while ($r = $result2->fetch_assoc())
+         {
+	         $flag=$r['like'];
+	         
+         }
+}else
+{
+	$flag = 0;
+}
+$sql5 = "select * from about  where userid =".$a['userid'];
+	 
+	 $result5 = $conn->query($sql5);
+           if ($result5->num_rows > 0)
+            {
+              while ($b = $result5->fetch_assoc())
+              { 
+	             $img = $b['file'];
+	             
+              }
+            }
 
   ?>
-  <!-- Site made with Mobirise Website Builder v4.3.0, https://mobirise.com -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
-<link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  
 <link rel="stylesheet" href="css/homestyle.css">
 </head>
 <body>
+<script>
+	function like(id,act)
+	{
+		
+		var	httpx = new XMLHttpRequest();
+			httpx.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200)
+			{
+				document.getElementById('like'+id).innerHTML =  this.responseText;
+			}
+		};
+	  httpx.open('GET',"like.php?postid="+id+"&act="+act,true);
+	  httpx.send();
+	
+}
+</script>
 <div class="card padding-0 " id="feedscards">
 <div class="card-body">
-<h5 class="card-title"><img src="css/man.png"  class="avtar" height="30" width="30"> <?php echo $b['firstname'].$b['lastname']; ?>
-</h5>
+<a onclick="profile(<?php echo $a['userid'];?>)"><h5 class="card-title"><img  src="<?php echo $img;?>"  class="avtar" height="30" width="30"> <?php echo $a['firstname']." ".$a['lastname']; ?>
+</h5></a>
+
 <p class="card-text">
 <?php
-  $postitems = new data($a["POSTid"],$a["userid"]);
   echo $a["textinfo"];
-  $is = $postitems->id;
+ 
 ?></p>
-</div>
-<div class="card-footer interaction">
-<a href="#"><img id="icon"src= "css/share.svg" height="23" width="23"></a>
-<a href="#" data-toggle="modal" data-target="#commentmodle<?php echo$postitems->id; ?>"><img id = "icon"src= "css/comment.svg" height="23" width="23">
-</a>
-<a href="#"><img  id="icon"src= "css/like.svg" height="23" width="23"></a>
+<div style="align-content: center">
+<?php
+	if(isset($a['file']))
+	{
+		echo "<img style='display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%' src='".$a['file']."' height='auto' weight='auto' >";
+	}
+?>
 </div>
 </div>
 
-<div  id="commentmodle<?php echo$postitems->id; ?>" class="modal" tabindex="-1" role="dialog">
+
+<div class="card-footer interaction">
+<a href="#"data-toggle="modal" data-target="#share<?php echo $is;?>"><img id="icon"src= "css/share.svg" height="23" width="23"></a>
+<a href="#" data-toggle="modal" data-target="#commentmodle<?php echo $is; ?>"><img id="icon"src= "css/comment.svg" height="23" width="23">
+</a>
+<div  style="display: inline" id='like<?php echo $is;?>'>
+<?php
+	if($flag == 1)
+	{
+		
+		echo "<a onclick='like( ".$is.",0)'><img  id='icon' src= 'css/like2.svg' height='23' width='23'></a>";
+		
+	}else
+	{
+echo "<a onclick='like( ".$is.",1)'><img  id='icon' src= 'css/like.svg' height='23' width='23'></a>";
+     }
+?>
+</div>
+</div>
+</div>
+
+<div  id="commentmodle<?php echo $is; ?>" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">comment</h5>
+        <h5 class="modal-title">COMMENTS</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -50,7 +149,7 @@
 
           <?php
 
-          $sql3 = "select * from comments where POSTid =".$is;
+          $sql3 = "select comments.text,users.firstname,users.lastname,users.userid from comments , users where POSTid =".$is." and comments.userid=users.userid";
 
          $result3 = $conn->query($sql3);
          if($result3 ->num_rows > 0)
@@ -59,18 +158,28 @@
          while ($r = $result3->fetch_assoc())
          {
 
-           $stmt = "select * from users where userid =".$r['userid'];
-
-              $result4 = $conn->query($stmt);
-              while ($a = $result4->fetch_assoc())
-              { echo "<hr>";
-                echo "<h5>";
-              echo "<img src='css/man.png' class='avtar' height='30' width='30'> ";
-                echo $a['firstname'].$a['lastname'];
-                echo "</h5>";
-              echo "<p>".$r['text']."</p>";
-              echo "<hr>";
+         $sql4 = "select * from about  where userid =".$r['userid'];
+	 
+	        $result4 = $conn->query($sql4);
+           if ($result4->num_rows > 0)
+            {
+              while ($c = $result4->fetch_assoc())
+              { 
+	             $pic = $c['file'];
+	             
               }
+            }
+
+            echo "<hr>";
+                echo "<h5>";
+              echo "<img src='".$pic."' class='avtar' height='30' width='30'> ";
+             
+               echo $r['firstname']." ".$r['lastname'];
+               echo "</h5>";
+              echo "<p>".$r['text']."</p>";
+             
+              echo "<hr>";
+              
           }
 
           }else {
@@ -83,7 +192,7 @@
         <form class="" action="comment.php" method="post">
           <input type="number" name="postid" value="<?php echo $is; ?>" hidden="true">
           <input type="text" name="comment" placeholder="comment">
-          <button type="submit" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-primary">comment</button>
 
         </form>
 
@@ -91,6 +200,43 @@
     </div>
   </div>
 </div>
+
+<div  id="share<?php echo $is;?>" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="">
+    <div class="modal-content" style="width: 790;    margin-left: -107px;">
+      <div class="modal-header">
+        <h5 class="modal-title" style="font-size: 23;margin-left: 315 ; color: grey">Find Friends</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>  
+        <div style="margin-left:20;margin-top: 30;margin-right: 20">
+		        <form action="" method="post">
+		        <input id="" type="text" name="friends_name" onkeyup="ShareName(this.value,<?php echo $is;?>)" placeholder="frinends" style="width: 750; text-align: center">
+		      </form>
+		        <hr>
+		     </div>   
+             <div class="modal-body" >
+	         
+	             <div id="list<?php echo $is;?>" style="margin-left: 29px;
+    margin-right: -20px">
+		             </div>
+	        </div>
+	        </div>
+	        </div>
+	        </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

@@ -1,0 +1,102 @@
+.request{
+	background-color: white;
+	margin: 10;
+	height: 650;
+	border-radius: 7px;
+}
+.profile{
+	margin-left: 15;
+	margin-bottom: -50;
+	margin-top: 14;
+	border-radius: 50%;
+	
+	
+}
+.left{
+	margin-left: 135;
+}
+.button1{
+	background-color:#48d0ec;
+	color: white;
+	width: 75;
+	height: 30;
+	margin-left: 10;
+	border-radius: 20px;
+	border: 0px;
+	
+}
+.subname{
+	font-size: 18;
+	color: black;
+	margin-left: 65;
+}
+.requests
+{
+	border: 0.5px solid #edededed;
+	margin-left: 6;
+	margin-bottom: 10;
+	border-radius: 10px;
+	height: 75;
+	width: 315;
+
+}
+.friendslist{
+	background-color: white;
+	margin: 10;
+	height: 650;
+	border-radius: 7px;
+	
+}
+.subtitle{
+	margin-left: 75;
+	font-size: 18;
+	color: #cdcdcdcd;
+	margin-bottom: -30;
+}
+.name{
+	margin-left: 75;
+	color: black;
+	font-size: 25;
+	font-family: sans-serif;
+}
+input{
+	text-align: center;
+	color: gray;
+	font-family:serif;
+	width: 520;
+	height: 35;
+	border: 0px;
+	border-bottom:  3px solid #edededed;
+	border-radius: 3px;
+}
+.button{
+	margin-left: 420;
+	height: 35;
+	width: 140;
+	border: 2px solid #edededed;
+	color: gray;	
+	border-radius: 30px;
+}
+form{
+	margin-left: 90;
+}
+.cardlist{
+	margin-left: 60;
+}
+.scroll {
+  
+  height: 600px;
+  overflow-y: scroll; // Only add scroll to vertical column
+}
+
+
+.listview{
+	border: 0.5px solid #edededed;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
+	margin-bottom: 7;
+	height: 100;
+	margin-left: 10;
+	margin-right: 60;
+	border-radius: 10px;
+	
+}

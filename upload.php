@@ -1,21 +1,9 @@
 <?php
-require 'dataconnetion.php';
-session_start();
-$textinfo = $_POST["newpost"];
-$userid = $_SESSION['id'];
-
-
-$imageFileType = strtolower(pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION));
-
-
-
-if($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg"
-|| $imageFileType == "gif")
-{
 $target_dir = "uploads/";
-$target_file = $target_dir.$userid."0".round(microtime(true))." .".pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION);
+$userid =1;
+$target_file = $target_file = $target_dir.$userid."0".round(microtime(true))." .".pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION);
 $uploadOk = 1;
-
+$imageFileType = strtolower(pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION));
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
     $check = getimagesize($_FILES["file"]["tmp_name"]);
@@ -50,37 +38,19 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["file"]["name"]). " has been uploaded.";
-         
- if($smt = $conn->prepare("insert into post values(?,?,CURRENT_TIMESTAMP,NULL,?)"))
-  {
-    $smt->bind_param("sss",$textinfo,$target_file,$userid);
-    $smt->execute();
-    header("location:Home.php");
-  }else
-  {     
-  
-  echo "error".$e->getmessage();
-   }
-
         
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
-    
-  } 
-   }
-    else
-    {
-     if($smt = $conn->prepare("insert into post values(?,NULL,CURRENT_TIMESTAMP,NULL,?)"))
-  {
-    $smt->bind_param("ss",$textinfo,$userid);
-    $smt->execute();
-    header("location:Home.php");
-  }else
-  {     
-  
-  echo "error".$e->getmessage();
-   }
-     }
+     
+}
 
 ?>
+<html >
+	<head >
+		</head>
+		<body >
+			<img src="<?php echo $target_file;?>">
+			</body>
+			</html>
+			

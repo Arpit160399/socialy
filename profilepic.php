@@ -1,10 +1,35 @@
+
 <?php
-require 'dataconnetion.php';
-session_start();
-$textinfo = $_POST["newpost"];
-$userid = $_SESSION['id'];
-
-
+	require 'dataconnetion.php';
+	session_start();
+	$id = $_SESSION['id'];
+	
+	
+	
+	
+	
+	$sql = "select * from about where userid=".$id;
+	
+	$result = $conn->query($sql);
+	if($result->num_rows > 0)
+	{
+		$flag=true;
+		while($a = $result->fetch_assoc())
+		{
+			$flag=true;
+			$d = $a['file'];
+			if(isset($d))
+			{
+				unlink($d);
+			} 
+			
+		}		
+		
+	}else{
+		$flag = false;
+	}
+	
+	
 $imageFileType = strtolower(pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION));
 
 
@@ -12,8 +37,8 @@ $imageFileType = strtolower(pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION)
 if($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg"
 || $imageFileType == "gif")
 {
-$target_dir = "uploads/";
-$target_file = $target_dir.$userid."0".round(microtime(true))." .".pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION);
+$target_dir = "profile/";
+$target_file = $target_dir.$id."0".round(microtime(true))." .".pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION);
 $uploadOk = 1;
 
 // Check if image file is a actual image or fake image
@@ -47,19 +72,34 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
 if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
-} else {
-    if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+} 
+else 
+ {
+    if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) 
+    {
         echo "The file ". basename( $_FILES["file"]["name"]). " has been uploaded.";
-         
- if($smt = $conn->prepare("insert into post values(?,?,CURRENT_TIMESTAMP,NULL,?)"))
-  {
-    $smt->bind_param("sss",$textinfo,$target_file,$userid);
-    $smt->execute();
-    header("location:Home.php");
-  }else
+        
+         if($flag)
+         {
+	         $sql1="update about set file ='".$target_file."' where userid = ".$id;
+	         
+	         
+         }
+         else
+         {
+	         $sql1="insert into about values(".$id.",'".$target_file."',NUll,NULL)";
+	         
+	         
+         }
+        if($conn->query($sql1) === TRUE)
+           {
+        header("location:profile.php");
+          }
+  else
+  
   {     
   
-  echo "error".$e->getmessage();
+  echo "error".$conn->error;
    }
 
         
@@ -69,18 +109,4 @@ if ($uploadOk == 0) {
     
   } 
    }
-    else
-    {
-     if($smt = $conn->prepare("insert into post values(?,NULL,CURRENT_TIMESTAMP,NULL,?)"))
-  {
-    $smt->bind_param("ss",$textinfo,$userid);
-    $smt->execute();
-    header("location:Home.php");
-  }else
-  {     
-  
-  echo "error".$e->getmessage();
-   }
-     }
-
-?>
+    ?>

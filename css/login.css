@@ -111,6 +111,7 @@ border: 0px;
 }
 .sectiondivide{
   background-color: #edededed;
-  height: 250px;
+  height: 400px;
+  margin-left: 20;
   background-size: cover;
 }

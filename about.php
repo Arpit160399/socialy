@@ -1,19 +1,16 @@
-<?php
+<?php 
+	session_start();
 require 'dataconnetion.php';
-session_start();
-$textinfo = $_POST["newpost"];
-$userid = $_SESSION['id'];
-
+$job = $_POST["job"];
+$hobbies = $_POST["hobbies"];
+$id = $_SESSION['id'];
 
 $imageFileType = strtolower(pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION));
-
-
-
 if($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg"
 || $imageFileType == "gif")
 {
-$target_dir = "uploads/";
-$target_file = $target_dir.$userid."0".round(microtime(true))." .".pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION);
+$target_dir = "profile/";
+$target_file = $target_dir.$id."0".round(microtime(true))." .".pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION);
 $uploadOk = 1;
 
 // Check if image file is a actual image or fake image
@@ -33,10 +30,13 @@ if (file_exists($target_file)) {
     $uploadOk = 0;
 }
 // Check file size
+/*
 if ($_FILES["file"]["size"] > 500000) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
 }
+*/
+$target_file = compress($_FILES['file']['tmp_name'], $target_file,60);
 // Allow certain file formats
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 && $imageFileType != "gif" ) {
@@ -51,11 +51,11 @@ if ($uploadOk == 0) {
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["file"]["name"]). " has been uploaded.";
          
- if($smt = $conn->prepare("insert into post values(?,?,CURRENT_TIMESTAMP,NULL,?)"))
+ if($smt = $conn->prepare("insert into about values(?,?,?,?)"))
   {
-    $smt->bind_param("sss",$textinfo,$target_file,$userid);
+    $smt->bind_param("ssss",$id,$target_file,$job,$hobbies);
     $smt->execute();
-    header("location:Home.php");
+    header("location:profile.php");
   }else
   {     
   
@@ -68,19 +68,52 @@ if ($uploadOk == 0) {
     }
     
   } 
-   }
-    else
-    {
-     if($smt = $conn->prepare("insert into post values(?,NULL,CURRENT_TIMESTAMP,NULL,?)"))
-  {
-    $smt->bind_param("ss",$textinfo,$userid);
-    $smt->execute();
-    header("location:Home.php");
-  }else
-  {     
-  
+   }else
+   {
+ 
+try {
+	 if($smt = $conn->prepare("insert into about values(?,null,?,?)"))
+      {
+       $smt->bind_param("sss",$id,$job,$hobbies);
+       $smt->execute();
+       
+       
+          header("location:profile.php");
+       }else
+       {
+	       throw("statment wrong");
+       }
+  }
+catch(PDOException $e)
+ {
   echo "error".$e->getmessage();
    }
-     }
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   function compress($source, $destination, $quality) {
 
+    $info = getimagesize($source);
+
+    if ($info['mime'] == 'image/jpeg') 
+        $image = imagecreatefromjpeg($source);
+
+    elseif ($info['mime'] == 'image/gif') 
+        $image = imagecreatefromgif($source);
+
+    elseif ($info['mime'] == 'image/png') 
+        $image = imagecreatefrompng($source);
+
+    imagejpeg($image, $destination, $quality);
+
+    return $destination;
+}
 ?>

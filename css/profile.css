@@ -1,0 +1,112 @@
+.avtarprofile
+{
+	border: 10px  outset rgba(0, 0, 0, 0.10);
+
+	background-color: white;
+	margin-left: 90;
+    margin-top:  -115;
+	border-radius: 50%;
+
+	
+}
+.about{
+	background-color: white;
+	margin-left: -10;
+	margin-right: -15;
+	
+}
+.view{
+	margin: 10;
+	border: 0;
+}
+
+.view:hover{
+	padding-top: 10;
+	border: 1px  solid gray;
+	border-left: 0px;
+	border-right: 0px; 
+}
+.buttonpois{
+	position: absolute;
+	left: 80%;
+	top: 40;
+}
+.textsection{
+	margin-top: 30;
+	margin-left: 60;
+	margin-right: 30;
+	
+}
+.following{
+	background-color: #E3ECE7;
+	margin-top: -10;
+	padding-left: 10;
+	padding-right: 20;
+}
+.subtext{
+	color: #cdcdcd ;
+	font-weight: 200;
+
+	margin-left: 10;
+}
+.button
+{
+	font-family: sans-serif;
+	font-weight: 350;
+	width: 130;
+	margin-top: 10;
+	height: 40;
+	
+	border: 0;
+	background-color: white;
+	color: black;
+	border-radius: 30px
+}
+.numb{
+  margin-left: 55;
+  font-weight: 150;
+	display: inline;
+		font-size: 20;	
+}
+.profilename{
+	font-weight: 350;
+	font-family: sans-serif;
+	font-size: 30;
+	margin-left: 310;
+	 margin-top: 0;
+	color: white;
+	
+}
+.adjustment1{
+	margin-left: 295;
+	
+}
+.adjustment2{
+	margin-left: 270;
+}
+.title{
+	font-weight: 250;
+	display: inline;
+	margin-left: 15;
+	font-size: 20;
+}
+.scroll {
+  height: 630px;
+  overflow-y: scroll; // Only add scroll to vertical column
+}
+.overlay {
+    margin-left: -30;
+	 margin-top: -153;
+     position: absolute; 
+  
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.02); 
+  color: #f1f1f1; 
+  width: 1380;
+  height: 152;
+ 
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+
+  }
